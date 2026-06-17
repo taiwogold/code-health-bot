@@ -38,4 +38,3 @@ if __name__ == "__main__":
     else:
         for issue in findings:
             print(f"[WARNING] {issue}")
-``
