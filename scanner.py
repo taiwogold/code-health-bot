@@ -1,7 +1,6 @@
 import os
 from rules import check_none_issues, check_try_except, check_hardcoded_values
 
-
 def scan_file(file_path):
     results = []
 
@@ -38,3 +37,27 @@ if __name__ == "__main__":
     else:
         for issue in findings:
             print(f"[WARNING] {issue}")
+import json
+
+if __name__ == "__main__":
+    directory = "sample_code"
+    findings = scan_directory(directory)
+
+    report = {
+        "total_issues": len(findings),
+        "issues": findings
+    }
+
+    # ✅ Save JSON report
+    with open("reports/output.json", "w") as f:
+        json.dump(report, f, indent=4)
+
+    print("\n🔍 Code Health Report:\n")
+
+    if not findings:
+        print("✅ No issues found")
+    else:
+        for issue in findings:
+            print(f"[WARNING] {issue}")
+
+    print("\n✅ JSON report generated at reports/output.json")
